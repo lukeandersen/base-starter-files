@@ -1,0 +1,158 @@
+@charset "utf-8";
+
+// Additional  compass includes
+@import "compass";
+@import "compass/css3"; 
+// @import "susy"; 
+// Here's where we import and combine all of our partials 
+
+@import "partials/reset.scss";
+@import "partials/mixins.scss";
+@import "partials/type.scss";
+
+
+// AUTO SPRITES
+// add dimensions of image dynamically CSS
+$assets-sprite-dimensions: true;
+//add spacing to all sprites
+$assets-spacing: 20px; 
+@import "sprites/assets/*.png";
+@include all-assets-sprites;
+
+//-----------------------------------
+// Add your site vairables here
+//-----------------------------------
+
+//Site
+$base-site-width: 960px;
+
+//Type
+$base-font-family: $helvetica;
+$base-font-size: 12px;
+$base-line-height: 1.4;
+$font-color: #222;
+
+// used for mixins
+$baseFontSize: 16; 
+
+//Links
+$link-color: #00e;
+$link-visited-color: #551a8b;
+$link-hover-color: #06e;
+
+// text colours
+$loud: #000;
+$main: #333;
+
+
+// //SUZY SETTINGS AND USAGE
+// //this is the default number of columns
+// $total-columns: 5; 
+//  //width of each column
+// $column-width   : 11.375em; 
+//  //space between columns
+// $gutter-width   : 1.25em; 
+//  //space on the right and left of the grid
+// $grid-padding   : 0em ;
+// $container-width : 60em;
+//  //alternative layout breakpoints
+// $tablet: 45em 8;
+// // $computer: 50em 10;
+
+
+@import "partials/placeholders.scss";
+@import "partials/wysiwyg.scss";
+
+
+/* REACTIVE - BASE STYLES
+ -----------------------------------------------------------------------------------------------------------*/
+em, i{font-style:italic;}strong, b{font-weight:bold;}
+a, input[type=button], input[type=submit], button { cursor:pointer }
+input {border: 0;}
+
+//-----------------------------------
+// Add your own custom styles below
+//-----------------------------------
+
+/* STRUCTURE
+ -----------------------------------------------------------------------------------------------------------*/
+html, body{ font-size: 100%; -webkit-font-smoothing: antialiased; }
+body {  
+    color:$font-color; 
+    font-family: $base-font-family;
+    line-height:$base-line-height;
+}
+
+.site { width:$base-site-width; margin:0 auto;}
+.site-header {}
+
+.site-navigation {
+    @extend %clearfix;
+    ul {
+        margin: 0; 
+        padding: 0;
+    }
+    li {
+        padding: 0; 
+        float: left; 
+        position: relative; 
+        list-style:none;
+        // Dropdown
+        > ul {
+            display: none; 
+            border-bottom: 1px solid #CCC;
+        }
+        &:hover > ul, &.hover > ul {
+            display: block; 
+            position: absolute; 
+            top:100%; 
+            left:0; 
+            width:200px; 
+            background:#dbdbdb;
+        }
+        li {
+            width:100%;
+            // Dropdown Second level
+            &:hover, &.hover {
+                > ul {
+                    top:0; 
+                    left:100%;
+                }
+                > a {
+                    border-bottom: 1px solid transparent; 
+                    background-color: #d1d1d1;   
+                }
+            }
+        }
+        // Active and hover
+        &:hover > a, &.hover > a, &.active a {
+            background:#dbdbdb; 
+            border-bottom: 1px solid transparent;
+        }
+    }
+    a {
+        text-decoration:none; 
+        color: #545454; 
+        padding: 6px 14px; 
+        display: block; 
+        border-bottom: 1px solid transparent; 
+        @include transition(all 0.3s);
+    }
+} 
+
+.site-main {}
+.site-footer {}
+
+/* Sprite demo */
+.sprite{
+    @include assets-sprite(search,false,20px,20px); //image-name, get sprite dimensions, offset-x, offset-y(relative to auto generated bg pos)
+}
+
+/* MAIN STYLES HERE 
+------------------------------------------------------------------------------------------------------------*/
+
+@import "partials/forms-buttons.scss";
+@import "partials/plugins.scss";
+@import "partials/helpers.scss";
+@import "partials/media-queries.scss";
+@import "partials/print.scss";

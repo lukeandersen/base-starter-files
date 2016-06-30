@@ -1,0 +1,23 @@
+<!-- The below is used to add page titles -->
+<% content_for :head do %>
+<title>Add page name here</title>
+<% end%>
+
+<!-- If you require a page class to be placed on the body use the below -->
+<% content_for :pageClasses do %><% end %>
+
+<!-- Add content for the header in this include if the header content is identical for all pages you can move this to layout.erb -->
+<%= partial "partials/header" %>
+
+<div class="main">
+	<ul class="template-list wysiwyg">
+	   <% sitemap.resources.each do |page| %>
+	       <% if page.url =~ /\.html/ %>
+	           <li><a href="<%= "#{page.url}" %>"><%= "#{page.url}" %></a></li>
+	       <% end %>
+	   <% end %>
+	</ul>
+</div>
+
+<!-- If you require a custom script on a single page use the below -->
+<% content_for :javascripts do %><% end%>
